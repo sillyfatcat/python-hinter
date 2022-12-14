@@ -50,7 +50,6 @@ def generate_recommendation_based_on_usage(function_call: str) -> str:
     parameters = parse_function_parameters(function_call)
     if not parameters:
         return function_call
-    print(f'{type(parameters)}')
     new_param_string = ", ".join(
         [f'"{parameter}": {get_candidate_based_on_type(parameter)}' if
          get_candidate_based_on_type(parameter) == "str" else
@@ -59,6 +58,7 @@ def generate_recommendation_based_on_usage(function_call: str) -> str:
     return replace_old_function_calls_with_new(function_call, new_param_string)
 
 
-def generate_recommendation_based_on_usages(function_calls: List[str]) -> List[str]:
-    for function_call in function_calls:
-        pass
+def generate_recommendation_based_on_usages(
+        function_calls: List[str]) -> List[str]:
+    return [generate_recommendation_based_on_usage(function_call)
+            for function_call in function_calls]

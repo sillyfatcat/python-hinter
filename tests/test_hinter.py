@@ -65,6 +65,8 @@ def test_replace_old_function_calls_with_new(
         ("""foo((1, 2))""", """foo((1, 2): Tuple[int])"""),
         ("""foo([1, 2])""", """foo([1, 2]: List[int])"""),
         ("""foo({"foo": "bar"})""", """foo({'foo': 'bar'}: Dict[str, str])"""),
+        ("""foo({"foo": "bar"}, [1, 2])""",
+         """foo({'foo': 'bar'}: Dict[str, str], [1, 2]: List[int])""")
     ]
 )
 def test_generate_recommendation_based_on_usage(function_call, expected):
